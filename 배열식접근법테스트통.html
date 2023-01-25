@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="disp" style="border: 2px solid pink;"></div>
+<script>
+    const members = [
+        {name:"양서연",pos:"lvl1"},
+        {name:"임채리",pos:"lvl2"},
+        {name:"박형준",pos:"lvl3"},
+        {name:"최셩수",pos:"lvl4"},
+        {name:"허근주",pos:"lvl2"}
+
+    ];
+
+    const position = {
+        "lvl1" : "사장님",
+        "lvl2" : "회장님",
+        "lvl3" : "고객님",
+        "lvl4" : "손님"
+    };
+
+//테이블 문자열 더하기 (자주 사용됨), 이런 류를 템플릿(Template)  이라고 부름
+// 꼭 배열식 접근법을 잘 쓰길!, 몇번 해보면 안어려움
+
+// let tblStr = "<table border=2>";
+//       tblStr += "<tr><th>순번</th><th>이름</th><th>직책</th></tr>";
+//       for(let i=0; i<members.length; i++){
+//         tblStr += "<tr>";
+//         tblStr += "<td>" + (i+1) +"</td>";
+//         tblStr += "<td>" + members[i].name +"</td>";
+//         tblStr += "<td>" + position[members[i].pos] +"</td>";
+//         tblStr += "</td>";
+//       }
+//       tblStr += "</table>";
+//       disp.innerHTML = tblStr;
+
+
+    // let v_disp = document.querySelector("#disp");
+    //     let tbStr = "<table border=2>";
+    //     tbStr += "<tr><th>순번</th><th>이름</th><th>직급</th></tr>";
+    //     for(let i=0; i<members.length; i++){
+    //         tbStr += "<tr>";
+    //         tbStr += "<td>"+(i+1)+"</td>";
+    //         tbStr += "<td>"+members[i].name+"</td>";
+    //         tbStr += "<td>"+position[members[i].pos]+"</td>";
+    //         tbStr += "</tr>";
+    //     }
+    //     tbStr +="</table>";
+    //     v_disp.innerHTML = tbStr;
+
+    // 백틱기호 사용
+    let tblStr = "<table border=2>";
+      tblStr += "<tr><th>순번</th><th>이름</th><th>직책</th></tr>";
+      for(let i=0; i<members.length; i++){
+        tblStr += `<tr>
+                   <td>${i+1}</td>
+                    <td>${members[i].name}</td>
+                    <td>${position[members[i].pos]}</td>
+                    </td>`
+                }
+        tblStr +=  "</table>";
+      disp.innerHTML = tblStr;
+
+        
+</script>
+</body>
+</html>
