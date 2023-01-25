@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta charset="UTF-8" />
+<body>
+<div class="aaa">서범수</div>
+<div class="aaa bbb">민경진</div>
+<div class="aaa">장은호</div>
+<div class="aaa">이현주</div>
+<div class="aaa bbb">이선민</div>
+<div class="aaa bbb">송지은</div>
+</body>
+
+<script>
+//콜백 연습을 위해 jQuery 코아를 만들어보기
+// 실제 jQuery는 훨씬 더 복잡, 이해를 위해 필요한 것만 심플하게 뽑아서...
+
+//class 사용할 것임
+//jQuery는 선택된 element를 전부 자신의 속성으로 옮겨 다음
+//옮겨놔야 마음대로 조작하기 편하기 때문에, 대신 성능에 대한 손해는 감수
+//결론 편리함을 얻고, 성능을 조금 내어줌
+
+//new를 없애주기 위한 함수
+
+// let factory; //젼역변수로 선언
+
+(function() {
+    let $ = function(p_selector) {
+        return new MyDom(p_selector);//생성해서 리턴
+    }   
+
+    let MyDom = function (p_selector) {
+        let elems = document.querySelectorAll(p_selector); //위에 가져온 걸 옮겨 담음
+        this.length = elems.length; //속성 length 선언
+        for(let i=0; i<this.length; i++) {
+            this[i] = elems[i];
+        }
+        return this; //명시적 표현(생략해도 생관없음)
+    }
+    window.$=$; //전역변수 factory와 지역변수 factory를 연결(참조)
+})();
+//jQuery  $의 탄생
+let check = $(".aaa.bbb"); //new를 감추는 데 성공
+console.log(check[1]); //눈으로 확인 중요
+</script>
