@@ -1,0 +1,30 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+<meta charset="UTF-8">
+<title>버튼 클릭하면 전구 on/off</title></head>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> 
+<body>
+<h1>room image1</h1>
+<img alt="sd" src="/log.png" id="pic">
+
+<script type="text/javascript">
+// $(function () {
+// 	let num = 0;
+// 	$("#pic").click(function() {
+// 		if(num == 3) num=0;
+// 		else 	     num++;	
+// 		$(this).attr("src","./image/"+ imageName[num]+".jpg");
+// 	});
+// });	
+$(function () {
+	let num = 0;
+	$("#pic").click(function() {
+		if(num == 3) num=0;
+		else 	     num++;	
+		$(this).attr("src","/main.png");
+	});
+});	
+</script>
+</body>
+</html>

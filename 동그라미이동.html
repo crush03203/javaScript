@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #ball {
+            position: absolute;
+            width:50px;
+            height:50px;
+            left: 65%;
+            top:55%;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 255, 0.3);
+            z-index: 222222;
+        }
+        #ball2 {
+            position: absolute;
+            width:50px;
+            height:50px;
+            left: 65%;
+            top:55%;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 255, 0.3);
+        }
+        #curePart {
+            position: relative;
+            border: 1px solid black;
+            width:460px;
+            height: 560px;
+        }
+        #curePart2{
+            position: relative;
+            border: 1px solid black;
+            width:460px;
+            height: 560px;
+        }
+        #yg {
+            position: absolute;
+        }
+        #yg2{
+            position: absolute;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>근육계</h1>
+    <!-- radio button은 name이 정말 중요하다 하나만 선택할 수 있어야한다 -->
+    목<input type="radio"  name="hh" onclick="f_move(1)">
+    어깨<input type="radio" name="hh"  onclick="f_move(2)">
+    허리<input type="radio" name="hh"  onclick="f_move(3)">
+    팔<input type="radio" name="hh"  onclick="f_move(4)">
+    무릎<input type="radio" name="hh"  onclick="f_move(5)">
+    종아리<input type="radio" name="hh"  onclick="f_move(6)">
+    <div id="curePart">
+        <img id="yg" src="./human.png">
+        <div id="ball"></div>
+    </div>
+    <h1>골절</h1>
+    <!-- radio button은 name이 정말 중요하다 하나만 선택할 수 있어야한다 -->
+    목<input type="radio"  name="hh1" onclick="f_bonemove(1)">
+    갈비뼈<input type="radio" name="hh1"  onclick="f_bonemove(2)">
+    척추<input type="radio" name="hh1"  onclick="f_bonemove(3)">
+    손목<input type="radio" name="hh1"  onclick="f_bonemove(4)">
+    종아리<input type="radio" name="hh1"  onclick="f_bonemove(5)">
+    발목<input type="radio" name="hh1"  onclick="f_bonemove(6)">
+    <div id="curePart2">
+        <img id="yg2" src="./bone.png">
+        <div id="ball2"></div>
+    </div>
+<script>
+    const partBall2 = document.querySelector("#ball2");
+    function f_bonemove(p_num){
+        if(p_num == 1){
+            //목
+            partBall2.style.left = "71%";
+            partBall2.style.top = "9%";
+            return; //if문에서 return문을 쓰게 되면, 다음실행문을 실행하지 않고 딱 그 부분만 실행 할 수 있다
+        }
+        if(p_num == 2){
+            // 갈비뼈
+            partBall2.style.left = "18%";
+            partBall2.style.top = "18%";
+            return;
+        }
+        if(p_num == 3){
+            // 허리
+            partBall2.style.left = "71%";
+            partBall2.style.top = "24%";
+            return;
+        }
+        if(p_num == 4){
+            //손목
+            partBall2.style.left = "54%";
+            partBall2.style.top = "31%";
+            return;
+        }
+        if(p_num == 5){
+            //종아리
+            partBall2.style.left = "21%";
+            partBall2.style.top = "55%";
+            return;
+        }
+        if(p_num == 6){
+            //발목
+            partBall2.style.left = "68%";
+            partBall2.style.top = "63%";
+            return;
+        }
+    }
+    const partBall = document.querySelector("#ball");
+    function f_move(p_num){
+        if(p_num == 1){
+            //목
+            partBall.style.left = "72%";
+            partBall.style.top = "12%";
+            return; //if문에서 return문을 쓰게 되면, 다음실행문을 실행하지 않고 딱 그 부분만 실행 할 수 있다
+        }
+        if(p_num == 2){
+            // 어깨
+            partBall.style.left = "9%";
+            partBall.style.top = "12%";
+            return;
+        }
+        if(p_num == 3){
+            // 허리
+            partBall.style.left = "17%";
+            partBall.style.top = "30%";
+            
+            return;
+        }
+        if(p_num == 4){
+            // 팔
+            partBall.style.left = "55%";
+            partBall.style.top = "25%";
+            return;
+        }
+        if(p_num == 5){
+            // 무릎
+            partBall.style.left = "65%";
+            partBall.style.top = "65%";
+            return;
+        }
+        if(p_num == 6){
+            // 발목
+            partBall.style.left = "11%";
+            partBall.style.top = "73%";
+            return;
+        }
+    }
+</script>    
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    #goodsShowDiv{
+        display: none;
+    }
+</style>
+<body>
+    <div>
+        <h4 class="h4-title1">공지사항</h4>
+        <hr>
+        <form  class="search-form" name="searchForm">
+            <select id="searchOption" class="radi-select ">
+                <option value>검색</option>
+                <option value='title'>제목</option>
+                <option value='content'>내용</option>
+            </select> 
+                <input name="searchBtn" class="radi-input" id="searchWord" type="text" value="">
+                <input class="btn-submit" id="Search" type="button" value="검색"> 
+                <input class="btn-submit" id="Write" type="button" value="글 쓰기" onclick="newWrite()"> 
+        </form>
+    </div>
+     
+    <div class="scroller">
+        <table style="border: solid 1px #000000;">
+            <thead class="fixedHeader">
+                <tr>
+                    <td>순번</td>
+                    <td>제목</td>
+                    <td>내용</td>
+                    <td>등록일자</td>
+                    <td>등록자</td>
+                </tr>
+                </thead>
+                <tbody id="noticeBody">
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                        </tr>
+                    </c:forEach>	
+                </tbody>
+            </table>
+        </div>
+            <div id="goodsShowDiv">
+                <form id="writeForm" name="writeForm">
+					<div class="mb-3 row">
+						<label for="ptDocument-input" class="col-sm-3 col-form-label">제목</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control writeChartCd " name="trmCd" id="writeChartCd" readonly="readonly" disabled>
+							<input type="hidden" class="form-control writeChartCd " name="trmCd" id="writeChartCd" readonly="readonly"  >
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label for="inputPassword" class="col-sm-3 col-form-label">내용</label>
+						<div class="col-sm-9">
+							<textarea class="form-control" name="pdCont" id="writeChartText"></textarea>
+						</div>
+					</div>
+					<input class="form-input" id="writeInsert" type="button" value="등록" onclick="writeInsertClick();"/>
+				</form>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+function newWrite () {
+    $("#goodsShowDiv").show();
+    $("#Write").click(function(event) {
+        $("#goodsShowDiv").toggle();
+    });
+}
+</script>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+/* 검색 */
+//엔터키 누르면 검색실행되게 하는 코드
+$(document).ready(function(){
+	//촬영실 영억 > 촬영실구분의 특정 촬영실 클릭 시 실행
+	$(document).on("click",".filmClass2",function(){
+		//this : 선택한 바로 그 요소
+		//<p class="filmClass2" data-trm-cd="TC0182" data-film-cd="MRI">MRI</p>
+		let strTrmCd = $(this).data("trmCd");
+		let strFilmCd = $(this).data("filmCd");
+		let strRcpNo = $(this).data("rcpNo");
+		let strDivCd = $(this).data("divCd");
+		let strWaitstCd = $(this).data("waitstCd");
+		
+		$("#strTrmCd").val(strTrmCd);
+		$("#strFilmCd").val(strFilmCd);
+		$("#strRcpNo").val(strRcpNo);
+		$("#strDivCd").val(strDivCd);
+		$("#strWaitstCd").val(strWaitstCd);
+		
+		$("#layerpop").modal("show");
+		
+		$("input:radio[name='filmCd']:radio[value='"+strFilmCd+"']").prop('checked', true);
+	});
+	
+    $("input[name=searchBtn]").keydown(function () {
+		//event.stopPropagation();
+        if(event.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+        	console.log("체크");
+            searchList();
+        }
+    });
+    $("#Search").on("click", function(){
+    	searchList();
+    });
+    
+    searchList = function (){
+        //검색 찾는 로직 구현
+        let searchOption = $("#searchOption option:selected").val();
+		let searchWord = $("#searchWord").val();
+		
+		console.log(searchOption);
+		console.log(searchWord);
+		
+		if(searchWord == ''){
+			swal('검색 실패!', "검색어를 입력해주세요", 'error');
+			return false;
+		}
+		
+		let data = {
+			searchOption:searchOption,
+			searchWord:searchWord
+		}
+		
+		$.ajax({
+			url : "patientSearch",
+			method : "post",
+			data : JSON.stringify(data),
+			contentType : "application/json;charset=utf-8",
+			dataType : "json",
+			success : function(result) { 
+				console.log(result);
+				console.log(result.length);
+				
+				if(result == null || result.length == 0){
+					// 기록이 없을 때
+					swal('검색실패', "환자 정보가 없습니다.", "error");
+				}else if(result.length == 1){
+					// 기록이 하나일 때
+					let trTags = [];
+					$.each(result, function(i, v){
+						console.log(v);
+						let trTag = $("<tr>")
+						.append(
+							$("<td>").html(v.paNo)
+							, $("<td>").html(v.paName)
+							, $("<td>").html(v.paReg)
+							, $("<td>").html(v.paSex)
+						).data("waitVO",v);
+						trTags.push(trTag);
+					})
+					$("#radiTBody").html(trTags);
+				}else{
+					// 기록이 여러개일 때
+					let trTags = [];
+					$.each(result, function(i, v){
+						console.log(v);
+						let trTag = $("<tr>")
+						.append(
+							$("<td>").html(v.paNo)
+							, $("<td>").html(v.paName)
+							, $("<td>").html(v.paReg)
+							, $("<td>").html(v.paSex)
+						).data("waitVO",v);
+						trTags.push(trTag);
+					})
+					$("#radiTBody").html(trTags);
+					
+				}
+			},
+			error : function(jqXHR, status, error) {
+				console.log(jqXHR);
+				console.log(status);
+				console.log(error);
+			}
+		});
+		
+		$("#searchWord").val("");
+    };
+});
+
+
+$.ajax({
+	url : "patientList",
+	method : "get",
+	contentType : "application/json;charset=utf-8",
+	dataType : "json",
+	success : function(result) { 
+		console.log(result);
+		console.log(result.length);
+
+		let trTags = [];
+		$.each(result, function(i, v){
+			console.log(v);
+			let trTag = $("<tr>").attr("class","filmClass")
+			.append(
+				$("<td>").html(v.paNo)
+				, $("<td>").html(v.paName)
+				, $("<td>").html(v.paReg)
+				, $("<td>").html(v.paSex)
+				, $("<input>").attr({
+					"type":"hidden",
+					"value": `\${v.paNo}`
+					})
+			).data("waitVO",v);
+			trTags.push(trTag);
+		})
+		$("#radiTBody").html(trTags);
+		$(".filmClass").on("click",function(){
+			console.log(this);
+			let value = $(this).children('input').val();
+			patientChartList(value);
+		})	
+	},
+	error : function(jqXHR, status, error) {
+		console.log(jqXHR);
+		console.log(status);
+		console.log(error);
+	}
+	
+});
+
+
+
+    </script>
+</body>
+</html>
